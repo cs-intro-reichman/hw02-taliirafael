@@ -30,39 +30,41 @@ public class OneOfEachStats {
 	int threeChildrenCount = 0;
 	int fourAndMoreChildrenCount = 0; 
 	String firstMostCommon = "";
+
 	
-	for (int i= 0; i < T; i++){
+	for (int i = 0; i < T; i++){
 		int childrenCount = 0;
 		boolean boyBorn = false; 
 		boolean girlBorn = false;
-	
-		while (!(boyBorn && girlBorn)) {
-			if (generator.nextDouble() < 0.5) { 
+		double rnd = generator.nextDouble();
+		while (boyBorn == false || girlBorn == false) { 
+			if (rnd < 0.5) { 
 				boyBorn = true;
 		} else {
 			girlBorn = true;
 		}
 		childrenCount++; 
+		rnd = generator.nextDouble();
 		}
 		totalChildren = totalChildren + childrenCount; 
 		if (childrenCount == 2) {
 			twoChildrenCount ++;
 			firstMostCommon = firstMostCommon + "2"; }
-		if (childrenCount == 3) {
+		else if (childrenCount == 3) {
 			threeChildrenCount ++;
 			firstMostCommon = firstMostCommon + "3";
 		}
-		if (childrenCount > 3) {
+		else {
 			fourAndMoreChildrenCount ++;
 			firstMostCommon = firstMostCommon + "4";
 		}
+		boyBorn = false;
+		girlBorn = false;
 	}
-	
-
-		System.out.println("Average: "+ (double) totalChildren/T + " children to get at least one of each gender");
-		System.out.println("Number of families with two children: " + twoChildrenCount);
-		System.out.println("Number of families with three children: " + threeChildrenCount);
-		System.out.println("Number of families with four or more children: " + fourAndMoreChildrenCount);
+		System.out.println("Average: "+ (double) totalChildren/T + " children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + twoChildrenCount);
+		System.out.println("Number of families with 3 children: " + threeChildrenCount);
+		System.out.println("Number of families with 4 or more children: " + fourAndMoreChildrenCount);
 
 		if (((twoChildrenCount > threeChildrenCount) && twoChildrenCount > fourAndMoreChildrenCount) || (firstMostCommon.charAt(0) == '2')) {
 			System.out.println("The most common number of children is 2."); 
