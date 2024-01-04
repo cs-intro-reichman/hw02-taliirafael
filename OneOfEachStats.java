@@ -24,6 +24,54 @@ public class OneOfEachStats {
 		//// just like you had in the previous version, except that the 
 		//// randomization will be based on the given seed.
 		//// This is the only change that you have to do in the program.
-		    
+	
+	int totalChildren = 0;
+	int twoChildrenCount = 0;
+	int threeChildrenCount = 0;
+	int fourAndMoreChildrenCount = 0; 
+	String firstMostCommon = "";
+	
+	for (int i= 0; i < T; i++){
+		int childrenCount = 0;
+		boolean boyBorn = false; 
+		boolean girlBorn = false;
+	
+		while (!(boyBorn && girlBorn)) {
+			if (generator.nextDouble() < 0.5) { 
+				boyBorn = true;
+		} else {
+			girlBorn = true;
+		}
+		childrenCount++; 
+		}
+		totalChildren = totalChildren + childrenCount; 
+		if (childrenCount == 2) {
+			twoChildrenCount ++;
+			firstMostCommon = firstMostCommon + "2"; }
+		if (childrenCount == 3) {
+			threeChildrenCount ++;
+			firstMostCommon = firstMostCommon + "3";
+		}
+		if (childrenCount > 3) {
+			fourAndMoreChildrenCount ++;
+			firstMostCommon = firstMostCommon + "4";
+		}
+	}
+	
+
+		System.out.println("Average: "+ (double) totalChildren/T + " children to get at least one of each gender");
+		System.out.println("Number of families with two children: " + twoChildrenCount);
+		System.out.println("Number of families with three children: " + threeChildrenCount);
+		System.out.println("Number of families with four or more children: " + fourAndMoreChildrenCount);
+
+		if (((twoChildrenCount > threeChildrenCount) && twoChildrenCount > fourAndMoreChildrenCount) || (firstMostCommon.charAt(0) == '2')) {
+			System.out.println("The most common number of children is 2."); 
+		}
+		else if (((threeChildrenCount > twoChildrenCount) && threeChildrenCount > fourAndMoreChildrenCount) || (firstMostCommon.charAt(0) == '3')) {
+			System.out.println("The most common number of children is 3." ); 
+		}
+		else if (((fourAndMoreChildrenCount > threeChildrenCount) && fourAndMoreChildrenCount > twoChildrenCount) || (firstMostCommon.charAt(0) == '4')) {
+			System.out.println("The most common number of children is 4 or more." );
+		}
 	}
 }
