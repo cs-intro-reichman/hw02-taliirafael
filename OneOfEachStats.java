@@ -24,6 +24,57 @@ public class OneOfEachStats {
 		//// just like you had in the previous version, except that the 
 		//// randomization will be based on the given seed.
 		//// This is the only change that you have to do in the program.
-		    
+	
+	int twoChildrenCount = 0;
+	int threeChildrenCount = 0;
+	int fourAndMoreChildrenCount = 0; 
+	int boyCounter = 0;
+	int girlCounter = 0;
+	int childrenCount = 0;
+	double rnd = generator.nextDouble();
+	
+	for (int i = 0; i < T; i++){
+		boolean boyBorn = false; 
+		boolean girlBorn = false;
+		while (boyBorn == false || girlBorn == false) { 
+			if (rnd < 0.5) { 
+				boyBorn = true;
+				boyCounter++;
+		} else {
+			girlBorn = true;
+			girlCounter++;
+		}
+		childrenCount++; 
+		rnd = generator.nextDouble();
+		}
+		if (girlCounter + boyCounter == 2) {
+			twoChildrenCount ++;
+			}
+		else if (girlCounter + boyCounter == 3) {
+			threeChildrenCount ++;
+		}
+		else {
+			fourAndMoreChildrenCount ++;
+		}
+		boyBorn = false;
+		girlBorn = false;
+		boyCounter = 0;
+		girlCounter = 0;
+		
+	}
+		System.out.println("Average: " + (childrenCount) / ((double) T) + " children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + (int)twoChildrenCount);
+		System.out.println("Number of families with 3 children: " + (int)threeChildrenCount);
+		System.out.println("Number of families with 4 or more children: " + (int)fourAndMoreChildrenCount);
+
+		if ((twoChildrenCount > threeChildrenCount) && twoChildrenCount > fourAndMoreChildrenCount) {
+			System.out.println("The most common number of children is 2."); 
+		}
+		else if (((threeChildrenCount > twoChildrenCount) && threeChildrenCount > fourAndMoreChildrenCount)) {
+			System.out.println("The most common number of children is 3." ); 
+		}
+		else if (((fourAndMoreChildrenCount > threeChildrenCount) && fourAndMoreChildrenCount > twoChildrenCount)) {
+			System.out.println("The most common number of children is 4 or more." );
+		}
 	}
 }
